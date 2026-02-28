@@ -1,0 +1,37 @@
+{
+  "device": "cpu",
+  "epochs": 100,
+  "action_loss": "hybrid",
+  "best_val_total_loss": 0.8649218498363079,
+  "val_step_metrics": {
+    "action_accuracy": 0.6081946222791293,
+    "cost_mae": 37.00334930419922,
+    "cost_rmse": 51.850704193115234,
+    "cost_r2": 0.23897501192289372
+  },
+  "test_step_metrics": {
+    "action_accuracy": 0.6449422946367956,
+    "cost_mae": 28.29752540588379,
+    "cost_rmse": 33.52712631225586,
+    "cost_r2": 0.29867300009032804
+  },
+  "kpis": {
+    "astar": {
+      "success_rate": 1.0,
+      "optimality_ratio": 1.0,
+      "decision_time_ms": 0.019701066101175165
+    },
+    "mlp": {
+      "success_rate": 0.1774193548387097,
+      "optimality_ratio": 5.006800037384606,
+      "decision_time_ms": 0.21527209309193587
+    }
+  },
+  "additional_metrics": {
+    "collision_rate": 0.0,
+    "timeout_rate": 0.8225806451612904,
+    "test_action_acc": 0.6449422946367956,
+    "test_cost_rmse": 33.52712631225586
+  },
+  "num_test_episodes_eval": 62
+}

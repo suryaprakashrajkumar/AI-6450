@@ -1,0 +1,259 @@
+\documentclass[12pt]{article}
+
+\usepackage[english]{babel}
+\usepackage[margin=0.85in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{booktabs}
+\usepackage{siunitx}
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage{xspace}
+\usepackage[T1]{fontenc}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{natbib}
+
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{INSE 6450 \newline Milestone 2}
+\rhead{Name: Suryaprakash Rajkumar \newline Date: \today}
+\rfoot{Page \thepage}
+\setlength{\headheight}{27.2pt}
+\addtolength{\topmargin}{-15.2pt}
+
+\newcommand{\imgdir}{iamges/} % Keep this directory name unchanged for Overleaf copy.
+
+\title{Milestone 2: Performance--Reliability Trade-offs in\
+Heuristic, Supervised, and Imitation-Learned Path Planning}
+\author{Suryaprakash Rajkumar}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This milestone presents a complete machine-learning pipeline for autonomous navigation in procedurally generated 2-D mazes. The workflow includes expert data generation with A*, dataset curation and audit, multi-task model training in PyTorch, and closed-loop evaluation against a classical planner baseline. In addition to predictive metrics, we report system-level KPIs required by real-time robotic deployment: success rate, path optimality ratio, and per-decision latency. We further discuss why a multi-task MLP is selected as the first deployable baseline and where its current limitations appear in closed-loop control.
+\end{abstract}
+
+\section{Milestone-2 Scope and Deliverables}
+Based on the course requirements, this milestone addresses: (i) model selection and architectural justification, (ii) training and experimental reporting, (iii) efficiency metrics, and (iv) deployment-oriented design trade-offs. All code is implemented in Python/PyTorch and versioned in GitHub.
+
+\section{Methodology: End-to-End System}
+\subsection{Problem Formulation}
+At time step $t$, the agent state $s_t$ is represented by a local occupancy patch $P_t$, relative-goal vector $g_t$, and position $p_t$. The learning objective is multi-task: predict the next action $a_t\in\{0,\dots,7\}$ (classification) and the remaining cost-to-go $c_t$ (regression).
+
+\subsection{Dataset Generation Strategy}
+We procedurally generate maze maps with controlled complexity and random seed for reproducibility. Valid start-goal pairs are sampled only when reachable. An 8-connected A* planner produces expert demonstrations and optimal costs.
+
+Each trajectory is converted to step-level supervised records:
+\begin{itemize}[leftmargin=1.5em]
+    \item Local occupancy patch centered on the agent,
+    \item Relative-goal displacement,
+    \item Agent coordinates,
+    \item Expert next action label (8-class),
+    \item Remaining optimal cost-to-go label.
+\end{itemize}
+
+\subsection{Quality and Issue Handling Plan}
+A dataset audit module validates the assumptions from Milestone~1: missing values, unit consistency, duplicate states, class imbalance, outliers, and train/test drift. In the current audited set, missing values were absent, occupancy values were binary, and drift was low (small JS divergence between train and test action distributions), indicating acceptable supervision quality for baseline model training.
+
+\subsection{Training and Inference Pipeline}
+A shared MLP backbone with two task heads is used:
+\[
+h_t=f_\theta(x_t),\qquad
+z_t=W_a h_t+b_a,\qquad
+\hat c_t=W_c h_t+b_c.
+\]
+The action head outputs logits $z_t\in\mathbb{R}^8$, and the cost head predicts scalar $\hat c_t$. During rollout, invalid actions are masked before selection. This jointly supports control decisions (classification head) and value estimation (regression head).
+
+\paragraph{Textual workflow (no diagram).}
+The end-to-end procedure is executed in the following sequence:
+\begin{enumerate}[leftmargin=1.5em]
+    \item \textbf{Configuration and seeding:} set grid size, maze parameters, split ratios, and random seeds for reproducibility.
+    \item \textbf{Maze generation and sampling:} produce procedural maps and sample valid start-goal pairs.
+    \item \textbf{Expert labeling with A*:} compute optimal trajectories and step-wise cost-to-go labels.
+    \item \textbf{Feature/label extraction:} convert each trajectory step into supervised records (patch, relative goal, position, action, cost).
+    \item \textbf{Quality assurance:} run audits for missing values, duplicates, class balance, outliers, and train-test drift.
+    \item \textbf{Model training:} train a PyTorch multi-task MLP for 100 epochs and save checkpoints, logs, and curves.
+    \item \textbf{Closed-loop inference:} deploy policy on unseen mazes with invalid-action masking and trajectory logging.
+    \item \textbf{System benchmarking:} compare against A* using success rate, optimality ratio, and per-decision latency, plus auxiliary metrics.
+\end{enumerate}
+
+\section{Model Selection and Justification}
+\subsection{Plausible Model Families}
+Three plausible families were considered:
+\begin{enumerate}[leftmargin=1.5em]
+    \item \textbf{Linear / Logistic models}: fast and interpretable, but limited for maze topology.
+    \item \textbf{Tree-based methods}: robust on tabular features, weaker on local spatial occupancy patterns without heavy feature engineering.
+    \item \textbf{Neural MLP / CNN}: stronger non-linear capacity and straightforward multi-task extension; higher training cost but still real-time feasible at inference.
+\end{enumerate}
+
+\subsection{Chosen Baseline: Multi-task MLP}
+The MLP is selected because it offers the best baseline balance of expressiveness, simplicity, and deployment speed. It directly matches the mixed objective (classification + regression), reuses a shared latent representation, and keeps inference lightweight enough for per-step robotic decision support.
+
+\section{Training and Experimentation}
+\subsection{Split Strategy and Training Setup}
+Data is split into train/validation/test sets at dataset generation time with fixed seeds for reproducibility. Training is performed for 100 epochs using PyTorch, with logged learning curves and saved checkpoints. A class-weighted hybrid action loss was also explored to mitigate mild action imbalance.
+
+\subsection{Learning Dynamics}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.92\linewidth]{\imgdir{}training_curves.png}
+    \caption{Training dynamics of the multi-task model (total loss, task losses, and validation metrics). The curves show stable convergence but indicate a gap between per-step prediction quality and long-horizon closed-loop navigation success.}
+    \label{fig:learning_curves}
+\end{figure}
+
+\subsection{Dataset Diagnostics}
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{0.48\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{\imgdir{}action_class_distribution.png}
+        \caption{Action class distribution.}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.48\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{\imgdir{}cost_distribution_train_vs_test.png}
+        \caption{Cost-to-go distribution (train vs test).}
+    \end{subfigure}
+    \caption{Dataset audit visualizations used to verify class balance and distribution shift assumptions before training.}
+    \label{fig:data_audit}
+\end{figure}
+
+\section{Inference Behavior and System-Level Evaluation}
+\subsection{Joint Inference (Classification + Regression)}
+At each step, one forward pass outputs both action logits and cost estimate:
+\[
+\pi(a\mid s_t)=\mathrm{softmax}(z_t),\qquad
+a_t=\arg\max_{a\in\mathcal{A}_{\mathrm{valid}}(s_t)}\pi(a\mid s_t),\qquad
+\hat{c}_t\in\mathbb{R}.
+\]
+The action head drives movement, while regression provides value context for monitoring or future value-guided action refinement.
+
+\subsection{Qualitative Trajectory Example}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\linewidth]{\imgdir{}maze_path_visualization.png}
+    \caption{Example maze trajectory visualization. The learned policy can reach some goals but often follows longer routes than A*, revealing compounding decision error in long horizons.}
+    \label{fig:maze_vis}
+\end{figure}
+
+\subsection{KPI Comparison Against A*}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\linewidth]{\imgdir{}kpi_comparison_astar_vs_torch.png}
+    \caption{System KPI comparison between A* and the learned policy. A* remains optimal and highly reliable; the learned model trades path quality/reliability for learned inference behavior.}
+    \label{fig:kpi_cmp}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\linewidth]{\imgdir{}additional_metrics.png}
+    \caption{Additional metrics including collision/timeout behavior and model prediction quality indicators.}
+    \label{fig:additional_metrics}
+\end{figure}
+
+\section{Current Baseline Results Discussion}
+\subsection{Quantitative Summary}
+Table~\ref{tab:baseline_summary} reports the main baseline metrics from the current multi-task MLP run on the small-maze setting.
+
+\begin{table}[H]
+\centering
+\caption{Current baseline performance summary (small-maze setting).}
+\label{tab:baseline_summary}
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{Metric} & \textbf{Torch MLP} & \textbf{A*} \\
+\midrule
+Success rate & 0.177 & 1.000 \\
+Optimality ratio & 5.007 & 1.000 \\
+Decision time per step (ms) & 0.215 & 0.020 \\
+Test action accuracy & 0.645 & -- \\
+Test cost RMSE & 33.53 & -- \\
+Collision rate & 0.000 & -- \\
+Timeout rate & 0.823 & 0.000 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Interpretation}
+The baseline confirms a common behavior-cloning limitation in long-horizon navigation. While per-step predictive quality is moderate (action accuracy $\approx 64.5\%$), closed-loop reliability remains low due to compounding errors: the policy frequently enters suboptimal loops and times out before reaching the goal. This explains the gap between acceptable step-wise metrics and weak episode-level KPIs (success and optimality).
+
+From a systems perspective, the learned policy remains computationally lightweight, but A* still dominates reliability and path quality. Therefore, the current baseline is best interpreted as a deployment-oriented \emph{starting point} that validates the pipeline and motivates the imitation-learning upgrade proposed in the next section.
+
+\section{Efficiency and Deployment Considerations}
+\subsection{Training and Inference Efficiency}
+Training and inference logs are stored as artifacts for reproducibility. Inference is lightweight (sub-millisecond decision latency on CPU in this environment), but closed-loop quality remains the primary bottleneck compared with A* optimality.
+
+\subsection{Deployment Design and Trade-offs}
+The intended deployment is an \textbf{online edge inference + planner fallback} pattern:
+\begin{itemize}[leftmargin=1.5em]
+    \item Learned policy handles frequent low-latency action proposals.
+    \item A* fallback is triggered under uncertainty, repeated revisits, or timeout risk.
+    \item This hybrid design balances responsiveness and safety under runtime constraints.
+\end{itemize}
+
+\section{Conclusion and Next Steps}
+Milestone 2 demonstrates a complete, reproducible learning pipeline from synthetic expert data to system-level KPI evaluation. The selected MLP baseline is suitable for fast iteration and deployment-oriented analysis, but current closed-loop reliability in complex mazes indicates the need for stronger sequential robustness (e.g., data aggregation, value-guided action selection, or richer policy architectures) in the next milestone.
+
+\section{Next Step: Imitation Learning Paradigm and Improvement Plan}
+\subsection{Why Imitation Learning is the Correct Next Phase}
+The current supervised approach learns from expert state-action pairs but suffers from \emph{compounding error} during closed-loop rollout: once the model drifts away from expert states, prediction quality degrades and timeout risk increases. Imitation learning is the natural next step because it explicitly addresses distribution shift between training-time expert states and deployment-time learner states.
+
+\subsection{Target Imitation Learning Formulation}
+For Milestone 3, we will keep the same input representation
+\((P_t, g_t, p_t)\) and action space (8-neighbor moves), but replace pure one-shot behavior cloning with a dataset aggregation process:
+\begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Expert policy:} A* planner used as oracle labeler.
+    \item \textbf{Learner policy:} multi-task policy/value network (action + cost heads).
+    \item \textbf{Aggregation loop:} collect trajectories under the current learner, query A* for corrective labels on visited states, and append to training data.
+\end{itemize}
+This reduces covariate shift and improves long-horizon stability.
+
+\subsection{Planned Method Improvements to Current Pipeline}
+\textbf{(A) Data-level improvements}
+\begin{enumerate}[leftmargin=1.5em]
+    \item Increase trajectory diversity by mixing maze complexities and start-goal distances.
+    \item Add targeted hard-case sampling (states near dead-ends, narrow corridors, long-horizon goals).
+    \item Preserve and version aggregated datasets by iteration (e.g., \texttt{D0, D1, D2, ...}).
+\end{enumerate}
+
+\textbf{(B) Training-level improvements}
+\begin{enumerate}[leftmargin=1.5em]
+    \item Use a hybrid objective: cross-entropy for action + MSE for cost-to-go.
+    \item Keep class-weighted action loss and validate with ablation.
+    \item Tune loss weights and early-stopping strategy using validation KPIs.
+\end{enumerate}
+
+\textbf{(C) Inference-level improvements}
+\begin{enumerate}[leftmargin=1.5em]
+    \item Use valid-action masking with revisit penalties (already introduced).
+    \item Add confidence-aware fallback to A* when policy uncertainty is high.
+    \item Add timeout-aware replanning trigger for safety and reliability.
+\end{enumerate}
+
+\subsection{Phased Execution Plan (Milestone 3 Ready)}
+\begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Phase 1:} Behavior cloning baseline reproduction with fixed seed and logs.
+    \item \textbf{Phase 2:} DAgger-style iteration-1 (collect learner rollouts, relabel with A*, retrain).
+    \item \textbf{Phase 3:} Additional aggregation rounds until KPI gains saturate.
+    \item \textbf{Phase 4:} Full benchmark against A* and current Milestone-2 baseline.
+\end{itemize}
+
+\subsection{Expected KPI Impact}
+Compared to current results, the imitation-learning upgrade is expected to:
+\begin{itemize}[leftmargin=1.5em]
+    \item Increase \textbf{success rate} by reducing off-distribution rollouts,
+    \item Lower \textbf{timeout rate} and improve closed-loop robustness,
+    \item Reduce \textbf{optimality ratio} gap relative to A*,
+    \item Preserve low-latency inference while using A* as a selective fallback.
+\end{itemize}
+
+\subsection{Reproducibility and Reporting Commitments}
+All imitation-learning iterations will be logged with versioned configuration (seed, optimizer, learning rate, batch size, loss weights), dataset lineage, and per-iteration KPI reports (success, optimality, latency, collision/timeout). This ensures reproducible comparison between the current supervised baseline and the improved imitation-learning pipeline.
+
+\end{document}

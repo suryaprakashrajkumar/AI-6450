@@ -1,0 +1,1555 @@
+{
+  "episode_id": 100,
+  "split": 2,
+  "success": true,
+  "collision": false,
+  "timeout": false,
+  "pred_path_steps": 140,
+  "pred_path_cost": 166.095454429505,
+  "optimal_path_cost": 39.04163056034262,
+  "optimality_ratio": 4.25431653457169,
+  "mean_model_decision_time_ms": 0.25741201451247825,
+  "astar_solve_time_ms": 0.6966450018808246,
+  "trace": [
+    {
+      "step": 0,
+      "position": [
+        11,
+        19
+      ],
+      "chosen_action": 4,
+      "chosen_prob": 0.706318736076355,
+      "predicted_cost_norm": 0.17011913657188416,
+      "decision_time_ms": 0.2626060013426468
+    },
+    {
+      "step": 1,
+      "position": [
+        12,
+        19
+      ],
+      "chosen_action": 7,
+      "chosen_prob": 0.5858393311500549,
+      "predicted_cost_norm": 0.28205424547195435,
+      "decision_time_ms": 0.2624490007292479
+    },
+    {
+      "step": 2,
+      "position": [
+        11,
+        18
+      ],
+      "chosen_action": 7,
+      "chosen_prob": 0.5142495632171631,
+      "predicted_cost_norm": 0.22506430745124817,
+      "decision_time_ms": 0.251955003477633
+    },
+    {
+      "step": 3,
+      "position": [
+        10,
+        17
+      ],
+      "chosen_action": 3,
+      "chosen_prob": 0.733741283416748,
+      "predicted_cost_norm": 0.21156686544418335,
+      "decision_time_ms": 0.2537070104153827
+    },
+    {
+      "step": 4,
+      "position": [
+        11,
+        18
+      ],
+      "chosen_action": 7,
+      "chosen_prob": 0.5142495632171631,
+      "predicted_cost_norm": 0.22506430745124817,
+      "decision_time_ms": 0.2735470043262467
+    },
+    {
+      "step": 5,
+      "position": [
+        10,
+        17
+      ],
+      "chosen_action": 3,
+      "chosen_prob": 0.733741283416748,
+      "predicted_cost_norm": 0.21156686544418335,
+      "decision_time_ms": 0.25921199994627386
+    },
+    {
+      "step": 6,
+      "position": [
+        11,
+        18
+      ],
+      "chosen_action": 7,
+      "chosen_prob": 0.5142495632171631,
+      "predicted_cost_norm": 0.22506430745124817,
+      "decision_time_ms": 0.2469380124239251
+    },
+    {
+      "step": 7,
+      "position": [
+        10,
+        17
+      ],
+      "chosen_action": 0,
+      "chosen_prob": 0.26396095752716064,
+      "predicted_cost_norm": 0.21156686544418335,
+      "decision_time_ms": 0.2590530057204887
+    },
+    {
+      "step": 8,
+      "position": [
+        9,
+        17
+      ],
+      "chosen_action": 0,
+      "chosen_prob": 0.6376987099647522,
+      "predicted_cost_norm": 0.1984362006187439,
+      "decision_time_ms": 0.2498499961802736
+    },
+    {
+      "step": 9,
+      "position": [
+        8,
+        17
+      ],
+      "chosen_action": 4,
+      "chosen_prob": 0.47830212116241455,
+      "predicted_cost_norm": 0.22068056464195251,
+      "decision_time_ms": 0.24703900271560997
+    },
+    {
+      "step": 10,
+      "position": [
+        9,
+        17
+      ],
+      "chosen_action": 0,
+      "chosen_prob": 0.6376987099647522,
+      "predicted_cost_norm": 0.1984362006187439,
+      "decision_time_ms": 0.25729500339366496
+    },
+    {
+      "step": 11,
+      "position": [
+        8,
+        17
+      ],
+      "chosen_action": 4,
+      "chosen_prob": 0.47830212116241455,
+      "predicted_cost_norm": 0.22068056464195251,
+      "decision_time_ms": 0.25209400337189436
+    },
+    {
+      "step": 12,
+      "position": [
+        9,
+        17
+      ],
+      "chosen_action": 0,
+      "chosen_prob": 0.6376987099647522,
+      "predicted_cost_norm": 0.1984362006187439,
+      "decision_time_ms": 0.2559470012784004
+    },
+    {
+      "step": 13,
+      "position": [
+        8,
+        17
+      ],
+      "chosen_action": 1,
+      "chosen_prob": 0.35451340675354004,
+      "predicted_cost_norm": 0.22068056464195251,
+      "decision_time_ms": 0.25710499903652817
+    },
+    {
+      "step": 14,
+      "position": [
+        7,
+        18
+      ],
+      "chosen_action": 1,
+      "chosen_prob": 0.6005623936653137,
+      "predicted_cost_norm": 0.25235167145729065,
+      "decision_time_ms": 0.2465150028001517
+    },
+    {
+      "step": 15,
+      "position": [
+        6,
+        19
+      ],
+      "chosen_action": 0,
+      "chosen_prob": 0.6140260696411133,
+      "predicted_cost_norm": 0.09972479939460754,
+      "decision_time_ms": 0.2536489919293672
+    },
+    {
+      "step": 16,
+      "position": [
+        5,
+        19
+      ],
+      "chosen_action": 0,
+      "chosen_prob": 0.6986256241798401,
+      "predicted_cost_norm": 0.17286483943462372,
+      "decision_time_ms": 0.25969599664676934
+    },
+    {
+      "step": 17,
+      "position": [
+        4,
+        19
+      ],
+      "chosen_action": 1,
+      "chosen_prob": 0.6913317441940308,
+      "predicted_cost_norm": 0.1471061408519745,
+      "decision_time_ms": 0.25348199415020645
+    },
+    {
+      "step": 18,
+      "position": [
+        3,
+        20
+      ],
+      "chosen_action": 1,
+      "chosen_prob": 0.37480542063713074,
+      "predicted_cost_norm": 0.20641210675239563,
+      "decision_time_ms": 0.25799400464165956
+    },
+    {
+      "step": 19,
+      "position": [
+        2,
+        21
+      ],
+      "chosen_action": 7,
+      "chosen_prob": 0.4510498046875,
+      "predicted_cost_norm": 0.20852428674697876,
+      "decision_time_ms": 0.25115598691627383
+    },
+    {
+      "step": 20,
+      "position": [
+        1,
+        20
+      ],
+      "chosen_action": 3,
+      "chosen_prob": 0.7947819828987122,
+      "predicted_cost_norm": 0.1325661838054657,
+      "decision_time_ms": 0.24396799562964588
+    },
+    {
+      "step": 21,
+      "position": [
+        2,
+        21
+      ],
+      "chosen_action": 7,
+      "chosen_prob": 0.4510498046875,
+      "predicted_cost_norm": 0.20852428674697876,
+      "decision_time_ms": 0.2510330086806789
+    },
+    {
+      "step": 22,
+      "position": [
+        1,
+        20
+      ],
+      "chosen_action": 3,
+      "chosen_prob": 0.7947819828987122,
+      "predicted_cost_norm": 0.1325661838054657,
+      "decision_time_ms": 0.2563779999036342
+    },
+    {
+      "step": 23,
+      "position": [
+        2,
+        21
+      ],
+      "chosen_action": 7,
+      "chosen_prob": 0.4510498046875,
+      "predicted_cost_norm": 0.20852428674697876,
+      "decision_time_ms": 0.25893200654536486
+    },
+    {
+      "step": 24,
+      "position": [
+        1,
+        20
+      ],
+      "chosen_action": 6,
+      "chosen_prob": 0.17890100181102753,
+      "predicted_cost_norm": 0.1325661838054657,
+      "decision_time_ms": 0.251507997745648
+    },
+    {
+      "step": 25,
+      "position": [
+        1,
+        19
+      ],
+      "chosen_action": 6,
+      "chosen_prob": 0.20364613831043243,
+      "predicted_cost_norm": 0.12282615900039673,
+      "decision_time_ms": 0.26038099895231426
+    },
+    {
+      "step": 26,
+      "position": [
+        1,
+        18
+      ],
+      "chosen_action": 2,
+      "chosen_prob": 0.9060638546943665,
+      "predicted_cost_norm": 0.1704370379447937,
+      "decision_time_ms": 0.25740200362633914
+    },
+    {
+      "step": 27,
+      "position": [
+        1,
+        19
+      ],
+      "chosen_action": 6,
+      "chosen_prob": 0.20364613831043243,
+      "predicted_cost_norm": 0.12282615900039673,
+      "decision_time_ms": 0.2603479952085763
+    },
+    {
+      "step": 28,
+      "position": [
+        1,
+        18
+      ],
+      "chosen_action": 2,
+      "chosen_prob": 0.9060638546943665,
+      "predicted_cost_norm": 0.1704370379447937,
+      "decision_time_ms": 0.2576690021669492
+    },
+    {
+      "step": 29,
+      "position": [
+        1,
+        19
+      ],
+      "chosen_action": 6,
+      "chosen_prob": 0.20364613831043243,
+      "predicted_cost_norm": 0.12282615900039673,
+      "decision_time_ms": 0.2601349988253787
+    },
+    {
+      "step": 30,
+      "position": [
+        1,
+        18
+      ],
+      "chosen_action": 6,
+      "chosen_prob": 0.09250403940677643,
+      "predicted_cost_norm": 0.1704370379447937,
+      "decision_time_ms": 0.2694650029297918
+    },
+    {
+      "step": 31,
+      "position": [
+        1,
+        17
+      ],
+      "chosen_action": 5,
+      "chosen_prob": 0.06762988865375519,
+      "predicted_cost_norm": 0.07653562724590302,
+      "decision_time_ms": 0.27816600049845874
+    },
+    {
+      "step": 32,
+      "position": [
+        2,
+        16
+      ],
+      "chosen_action": 1,
+      "chosen_prob": 0.470443457365036,
+      "predicted_cost_norm": 0.12767517566680908,
+      "decision_time_ms": 0.26612899091560394
+    },
+    {
+      "step": 33,
+      "position": [
+        1,
+        17
+      ],
+      "chosen_action": 5,
+      "chosen_prob": 0.06762988865375519,
+      "predicted_cost_norm": 0.07653562724590302,
+      "decision_time_ms": 0.2725209924392402
+    },
+    {
+      "step": 34,
+      "position": [
+        2,
+        16
+      ],
+      "chosen_action": 1,
+      "chosen_prob": 0.470443457365036,
+      "predicted_cost_norm": 0.12767517566680908,
+      "decision_time_ms": 0.2580900036264211
+    },
+    {
+      "step": 35,
+      "position": [
+        1,
+        17
+      ],
+      "chosen_action": 5,
+      "chosen_prob": 0.06762988865375519,
+      "predicted_cost_norm": 0.07653562724590302,
+      "decision_time_ms": 0.25501199706923217
+    },
+    {
+      "step": 36,
+      "position": [
+        2,
+        16
+      ],
+      "chosen_action": 3,
+      "chosen_prob": 0.44528520107269287,
+      "predicted_cost_norm": 0.12767517566680908,
+      "decision_time_ms": 0.27449900517240167
+    },
+    {
+      "step": 37,
+      "position": [
+        3,
+        17
+      ],
+      "chosen_action": 4,
+      "chosen_prob": 0.6848894953727722,
+      "predicted_cost_norm": 0.14240923523902893,
+      "decision_time_ms": 0.26295799762010574
+    },
+    {
+      "step": 38,
+      "position": [
+        4,
+        17
+      ],
+      "chosen_action": 4,
+      "chosen_prob": 0.6927767395973206,
+      "predicted_cost_norm": 0.1379988044500351,
+      "decision_time_ms": 0.25572800950612873
+    },
+    {
+      "step": 39,
+      "position": [
+        5,
+        17
+      ],
+      "chosen_action": 0,
+      "chosen_prob": 0.5758922100067139,
+      "predicted_cost_norm": 0.2149900197982788,
+      "decision_time_ms": 0.2502069983165711
+    },
+    {
+      "step": 40,
+      "position": [
+        4,
+        17
+      ],
+      "chosen_action": 4,
+      "chosen_prob": 0.6927767395973206,
+      "predicted_cost_norm": 0.1379988044500351,
+      "decision_time_ms": 0.2551780053181574
+    },
+    {
+      "step": 41,
+      "position": [
+        5,
+        17
+      ],
+      "chosen_action": 0,
+      "chosen_prob": 0.5758922100067139,
+      "predicted_cost_norm": 0.2149900197982788,
+      "decision_time_ms": 0.2498499961802736
+    },
+    {
+      "step": 42,
+      "position": [
+        4,
+        17
+      ],
+      "chosen_action": 4,
+      "chosen_prob": 0.6927767395973206,
+      "predicted_cost_norm": 0.1379988044500351,
+      "decision_time_ms": 0.24970498634502292
+    },
+    {
+      "step": 43,
+      "position": [
+        5,
+        17
+      ],
+      "chosen_action": 4,
+      "chosen_prob": 0.42327597737312317,
+      "predicted_cost_norm": 0.2149900197982788,
+      "decision_time_ms": 0.25619700318202376
+    },
+    {
+      "step": 44,
+      "position": [
+        6,
+        17
+      ],
+      "chosen_action": 3,
+      "chosen_prob": 0.2906365394592285,
+      "predicted_cost_norm": 0.22920674085617065,
+      "decision_time_ms": 0.253096004598774
+    },
+    {
+      "step": 45,
+      "position": [
+        7,
+        18
+      ],
+      "chosen_action": 1,
+      "chosen_prob": 0.6005623936653137,
+      "predicted_cost_norm": 0.25235167145729065,
+      "decision_time_ms": 0.2673029957804829
+    },
+    {
+      "step": 46,
+      "position": [
+        6,
+        19
+      ],
+      "chosen_action": 0,
+      "chosen_prob": 0.6140260696411133,
+      "predicted_cost_norm": 0.09972479939460754,
+      "decision_time_ms": 0.2615160046843812
+    },
+    {
+      "step": 47,
+      "position": [
+        5,
+        19
+      ],
+      "chosen_action": 0,
+      "chosen_prob": 0.6986256241798401,
+      "predicted_cost_norm": 0.17286483943462372,
+      "decision_time_ms": 0.24797099467832595
+    },
+    {
+      "step": 48,
+      "position": [
+        4,
+        19
+      ],
+      "chosen_action": 1,
+      "chosen_prob": 0.6913317441940308,
+      "predicted_cost_norm": 0.1471061408519745,
+      "decision_time_ms": 0.2584899921203032
+    },
+    {
+      "step": 49,
+      "position": [
+        3,
+        20
+      ],
+      "chosen_action": 3,
+      "chosen_prob": 0.3366365432739258,
+      "predicted_cost_norm": 0.20641210675239563,
+      "decision_time_ms": 0.25713500508572906
+    },
+    {
+      "step": 50,
+      "position": [
+        4,
+        21
+      ],
+      "chosen_action": 3,
+      "chosen_prob": 0.2937873899936676,
+      "predicted_cost_norm": 0.11907939612865448,
+      "decision_time_ms": 0.2588600036688149
+    },
+    {
+      "step": 51,
+      "position": [
+        5,
+        22
+      ],
+      "chosen_action": 1,
+      "chosen_prob": 0.3650454878807068,
+      "predicted_cost_norm": 0.16724255681037903,
+      "decision_time_ms": 0.25098399783018976
+    },
+    {
+      "step": 52,
+      "position": [
+        4,
+        23
+      ],
+      "chosen_action": 1,
+      "chosen_prob": 0.6605501770973206,
+      "predicted_cost_norm": 0.17113369703292847,
+      "decision_time_ms": 0.2505070006009191
+    },
+    {
+      "step": 53,
+      "position": [
+        3,
+        24
+      ],
+      "chosen_action": 3,
+      "chosen_prob": 0.41307583451271057,
+      "predicted_cost_norm": 0.13739025592803955,
+      "decision_time_ms": 0.2424870035611093
+    },
+    {
+      "step": 54,
+      "position": [
+        4,
+        25
+      ],
+      "chosen_action": 4,
+      "chosen_prob": 0.5663712024688721,
+      "predicted_cost_norm": 0.1348976194858551,
+      "decision_time_ms": 0.25386000925209373
+    },
+    {
+      "step": 55,
+      "position": [
+        5,
+        25
+      ],
+      "chosen_action": 0,
+      "chosen_prob": 0.6172332763671875,
+      "predicted_cost_norm": 0.13930775225162506,
+      "decision_time_ms": 0.2557920088293031
+    },
+    {
+      "step": 56,
+      "position": [
+        4,
+        25
+      ],
+      "chosen_action": 4,
+      "chosen_prob": 0.5663712024688721,
+      "predicted_cost_norm": 0.1348976194858551,
+      "decision_time_ms": 0.2544879971537739
+    },
+    {
+      "step": 57,
+      "position": [
+        5,
+        25
+      ],
+      "chosen_action": 0,
+      "chosen_prob": 0.6172332763671875,
+      "predicted_cost_norm": 0.13930775225162506,
+      "decision_time_ms": 0.27529100771062076
+    },
+    {
+      "step": 58,
+      "position": [
+        4,
+        25
+      ],
+      "chosen_action": 4,
+      "chosen_prob": 0.5663712024688721,
+      "predicted_cost_norm": 0.1348976194858551,
+      "decision_time_ms": 0.25093500153161585
+    },
+    {
+      "step": 59,
+      "position": [
+        5,
+        25
+      ],
+      "chosen_action": 4,
+      "chosen_prob": 0.38225963711738586,
+      "predicted_cost_norm": 0.13930775225162506,
+      "decision_time_ms": 0.243567003053613
+    },
+    {
+      "step": 60,
+      "position": [
+        6,
+        25
+      ],
+      "chosen_action": 5,
+      "chosen_prob": 0.15176618099212646,
+      "predicted_cost_norm": 0.230475053191185,
+      "decision_time_ms": 0.26065199926961213
+    },
+    {
+      "step": 61,
+      "position": [
+        7,
+        24
+      ],
+      "chosen_action": 2,
+      "chosen_prob": 0.6661574244499207,
+      "predicted_cost_norm": 0.22035646438598633,
+      "decision_time_ms": 0.25877800362650305
+    },
+    {
+      "step": 62,
+      "position": [
+        7,
+        25
+      ],
+      "chosen_action": 2,
+      "chosen_prob": 0.7629295587539673,
+      "predicted_cost_norm": 0.14972834289073944,
+      "decision_time_ms": 0.249805991188623
+    },
+    {
+      "step": 63,
+      "position": [
+        7,
+        26
+      ],
+      "chosen_action": 3,
+      "chosen_prob": 0.5878667831420898,
+      "predicted_cost_norm": 0.16436094045639038,
+      "decision_time_ms": 0.2576380065875128
+    },
+    {
+      "step": 64,
+      "position": [
+        8,
+        27
+      ],
+      "chosen_action": 7,
+      "chosen_prob": 0.7237544655799866,
+      "predicted_cost_norm": 0.23285502195358276,
+      "decision_time_ms": 0.25158199423458427
+    },
+    {
+      "step": 65,
+      "position": [
+        7,
+        26
+      ],
+      "chosen_action": 3,
+      "chosen_prob": 0.5878667831420898,
+      "predicted_cost_norm": 0.16436094045639038,
+      "decision_time_ms": 0.25601299421396106
+    },
+    {
+      "step": 66,
+      "position": [
+        8,
+        27
+      ],
+      "chosen_action": 7,
+      "chosen_prob": 0.7237544655799866,
+      "predicted_cost_norm": 0.23285502195358276,
+      "decision_time_ms": 0.2605699992273003
+    },
+    {
+      "step": 67,
+      "position": [
+        7,
+        26
+      ],
+      "chosen_action": 3,
+      "chosen_prob": 0.5878667831420898,
+      "predicted_cost_norm": 0.16436094045639038,
+      "decision_time_ms": 0.25108100089710206
+    },
+    {
+      "step": 68,
+      "position": [
+        8,
+        27
+      ],
+      "chosen_action": 3,
+      "chosen_prob": 0.16939102113246918,
+      "predicted_cost_norm": 0.23285502195358276,
+      "decision_time_ms": 0.24831999326124787
+    },
+    {
+      "step": 69,
+      "position": [
+        9,
+        28
+      ],
+      "chosen_action": 1,
+      "chosen_prob": 0.5590168237686157,
+      "predicted_cost_norm": 0.22333091497421265,
+      "decision_time_ms": 0.27030499768443406
+    },
+    {
+      "step": 70,
+      "position": [
+        8,
+        29
+      ],
+      "chosen_action": 0,
+      "chosen_prob": 0.7075060606002808,
+      "predicted_cost_norm": 0.14859983325004578,
+      "decision_time_ms": 0.24959900474641472
+    },
+    {
+      "step": 71,
+      "position": [
+        7,
+        29
+      ],
+      "chosen_action": 1,
+      "chosen_prob": 0.6758142709732056,
+      "predicted_cost_norm": 0.17307353019714355,
+      "decision_time_ms": 0.24830499023664743
+    },
+    {
+      "step": 72,
+      "position": [
+        6,
+        30
+      ],
+      "chosen_action": 2,
+      "chosen_prob": 0.5680204033851624,
+      "predicted_cost_norm": 0.1160266250371933,
+      "decision_time_ms": 0.2526860043872148
+    },
+    {
+      "step": 73,
+      "position": [
+        6,
+        31
+      ],
+      "chosen_action": 1,
+      "chosen_prob": 0.7189151644706726,
+      "predicted_cost_norm": 0.17248037457466125,
+      "decision_time_ms": 0.26261100720148534
+    },
+    {
+      "step": 74,
+      "position": [
+        5,
+        32
+      ],
+      "chosen_action": 1,
+      "chosen_prob": 0.5586922764778137,
+      "predicted_cost_norm": 0.15473857522010803,
+      "decision_time_ms": 0.2484170108800754
+    },
+    {
+      "step": 75,
+      "position": [
+        4,
+        33
+      ],
+      "chosen_action": 7,
+      "chosen_prob": 0.5179457664489746,
+      "predicted_cost_norm": 0.06618902087211609,
+      "decision_time_ms": 0.2649770030984655
+    },
+    {
+      "step": 76,
+      "position": [
+        3,
+        32
+      ],
+      "chosen_action": 3,
+      "chosen_prob": 0.543250560760498,
+      "predicted_cost_norm": 0.11790001392364502,
+      "decision_time_ms": 0.26200999855063856
+    },
+    {
+      "step": 77,
+      "position": [
+        4,
+        33
+      ],
+      "chosen_action": 7,
+      "chosen_prob": 0.5179457664489746,
+      "predicted_cost_norm": 0.06618902087211609,
+      "decision_time_ms": 0.2567509945947677
+    },
+    {
+      "step": 78,
+      "position": [
+        3,
+        32
+      ],
+      "chosen_action": 3,
+      "chosen_prob": 0.543250560760498,
+      "predicted_cost_norm": 0.11790001392364502,
+      "decision_time_ms": 0.263347988948226
+    },
+    {
+      "step": 79,
+      "position": [
+        4,
+        33
+      ],
+      "chosen_action": 7,
+      "chosen_prob": 0.5179457664489746,
+      "predicted_cost_norm": 0.06618902087211609,
+      "decision_time_ms": 0.2782489900710061
+    },
+    {
+      "step": 80,
+      "position": [
+        3,
+        32
+      ],
+      "chosen_action": 6,
+      "chosen_prob": 0.41130056977272034,
+      "predicted_cost_norm": 0.11790001392364502,
+      "decision_time_ms": 0.2674650022527203
+    },
+    {
+      "step": 81,
+      "position": [
+        3,
+        31
+      ],
+      "chosen_action": 6,
+      "chosen_prob": 0.3979874849319458,
+      "predicted_cost_norm": 0.1544872224330902,
+      "decision_time_ms": 0.2652520051924512
+    },
+    {
+      "step": 82,
+      "position": [
+        3,
+        30
+      ],
+      "chosen_action": 2,
+      "chosen_prob": 0.6413800120353699,
+      "predicted_cost_norm": 0.09577998518943787,
+      "decision_time_ms": 0.26394099404569715
+    },
+    {
+      "step": 83,
+      "position": [
+        3,
+        31
+      ],
+      "chosen_action": 6,
+      "chosen_prob": 0.3979874849319458,
+      "predicted_cost_norm": 0.1544872224330902,
+      "decision_time_ms": 0.25857599393930286
+    },
+    {
+      "step": 84,
+      "position": [
+        3,
+        30
+      ],
+      "chosen_action": 2,
+      "chosen_prob": 0.6413800120353699,
+      "predicted_cost_norm": 0.09577998518943787,
+      "decision_time_ms": 0.26305999199394137
+    },
+    {
+      "step": 85,
+      "position": [
+        3,
+        31
+      ],
+      "chosen_action": 6,
+      "chosen_prob": 0.3979874849319458,
+      "predicted_cost_norm": 0.1544872224330902,
+      "decision_time_ms": 0.25331799406558275
+    },
+    {
+      "step": 86,
+      "position": [
+        3,
+        30
+      ],
+      "chosen_action": 7,
+      "chosen_prob": 0.3451373279094696,
+      "predicted_cost_norm": 0.09577998518943787,
+      "decision_time_ms": 0.26442299713380635
+    },
+    {
+      "step": 87,
+      "position": [
+        2,
+        29
+      ],
+      "chosen_action": 1,
+      "chosen_prob": 0.38362330198287964,
+      "predicted_cost_norm": 0.09286153316497803,
+      "decision_time_ms": 0.25471000117249787
+    },
+    {
+      "step": 88,
+      "position": [
+        1,
+        30
+      ],
+      "chosen_action": 2,
+      "chosen_prob": 0.8543226718902588,
+      "predicted_cost_norm": 0.15182895958423615,
+      "decision_time_ms": 0.25153299793601036
+    },
+    {
+      "step": 89,
+      "position": [
+        1,
+        31
+      ],
+      "chosen_action": 2,
+      "chosen_prob": 0.7483066320419312,
+      "predicted_cost_norm": 0.11574605107307434,
+      "decision_time_ms": 0.2516659878892824
+    },
+    {
+      "step": 90,
+      "position": [
+        1,
+        32
+      ],
+      "chosen_action": 2,
+      "chosen_prob": 0.6826547384262085,
+      "predicted_cost_norm": 0.1557164341211319,
+      "decision_time_ms": 0.25315998937003314
+    },
+    {
+      "step": 91,
+      "position": [
+        1,
+        33
+      ],
+      "chosen_action": 2,
+      "chosen_prob": 0.6957931518554688,
+      "predicted_cost_norm": 0.22031506896018982,
+      "decision_time_ms": 0.26648900529835373
+    },
+    {
+      "step": 92,
+      "position": [
+        1,
+        34
+      ],
+      "chosen_action": 2,
+      "chosen_prob": 0.3726949691772461,
+      "predicted_cost_norm": 0.10822978615760803,
+      "decision_time_ms": 0.2520629932405427
+    },
+    {
+      "step": 93,
+      "position": [
+        1,
+        35
+      ],
+      "chosen_action": 2,
+      "chosen_prob": 0.7832145094871521,
+      "predicted_cost_norm": 0.21090450882911682,
+      "decision_time_ms": 0.25460000324528664
+    },
+    {
+      "step": 94,
+      "position": [
+        1,
+        36
+      ],
+      "chosen_action": 3,
+      "chosen_prob": 0.44283077120780945,
+      "predicted_cost_norm": 0.078924760222435,
+      "decision_time_ms": 0.2571820077719167
+    },
+    {
+      "step": 95,
+      "position": [
+        2,
+        37
+      ],
+      "chosen_action": 7,
+      "chosen_prob": 0.8998299241065979,
+      "predicted_cost_norm": 0.0320572555065155,
+      "decision_time_ms": 0.2629100054036826
+    },
+    {
+      "step": 96,
+      "position": [
+        1,
+        36
+      ],
+      "chosen_action": 3,
+      "chosen_prob": 0.44283077120780945,
+      "predicted_cost_norm": 0.078924760222435,
+      "decision_time_ms": 0.2612240059534088
+    },
+    {
+      "step": 97,
+      "position": [
+        2,
+        37
+      ],
+      "chosen_action": 7,
+      "chosen_prob": 0.8998299241065979,
+      "predicted_cost_norm": 0.0320572555065155,
+      "decision_time_ms": 0.26300099852960557
+    },
+    {
+      "step": 98,
+      "position": [
+        1,
+        36
+      ],
+      "chosen_action": 3,
+      "chosen_prob": 0.44283077120780945,
+      "predicted_cost_norm": 0.078924760222435,
+      "decision_time_ms": 0.25543899391777813
+    },
+    {
+      "step": 99,
+      "position": [
+        2,
+        37
+      ],
+      "chosen_action": 3,
+      "chosen_prob": 0.0901205912232399,
+      "predicted_cost_norm": 0.0320572555065155,
+      "decision_time_ms": 0.27022999711334705
+    },
+    {
+      "step": 100,
+      "position": [
+        3,
+        38
+      ],
+      "chosen_action": 1,
+      "chosen_prob": 0.318943589925766,
+      "predicted_cost_norm": 0.10264229774475098,
+      "decision_time_ms": 0.2636300050653517
+    },
+    {
+      "step": 101,
+      "position": [
+        2,
+        39
+      ],
+      "chosen_action": 5,
+      "chosen_prob": 0.7195706367492676,
+      "predicted_cost_norm": 0.1579088270664215,
+      "decision_time_ms": 0.2583739988040179
+    },
+    {
+      "step": 102,
+      "position": [
+        3,
+        38
+      ],
+      "chosen_action": 1,
+      "chosen_prob": 0.318943589925766,
+      "predicted_cost_norm": 0.10264229774475098,
+      "decision_time_ms": 0.26213900127913803
+    },
+    {
+      "step": 103,
+      "position": [
+        2,
+        39
+      ],
+      "chosen_action": 5,
+      "chosen_prob": 0.7195706367492676,
+      "predicted_cost_norm": 0.1579088270664215,
+      "decision_time_ms": 0.2636920107761398
+    },
+    {
+      "step": 104,
+      "position": [
+        3,
+        38
+      ],
+      "chosen_action": 1,
+      "chosen_prob": 0.318943589925766,
+      "predicted_cost_norm": 0.10264229774475098,
+      "decision_time_ms": 0.26101700495928526
+    },
+    {
+      "step": 105,
+      "position": [
+        2,
+        39
+      ],
+      "chosen_action": 0,
+      "chosen_prob": 0.022875823080539703,
+      "predicted_cost_norm": 0.1579088270664215,
+      "decision_time_ms": 0.2586399932624772
+    },
+    {
+      "step": 106,
+      "position": [
+        1,
+        39
+      ],
+      "chosen_action": 4,
+      "chosen_prob": 0.8205286264419556,
+      "predicted_cost_norm": 0.16950306296348572,
+      "decision_time_ms": 0.26465900009498
+    },
+    {
+      "step": 107,
+      "position": [
+        2,
+        39
+      ],
+      "chosen_action": 0,
+      "chosen_prob": 0.022875823080539703,
+      "predicted_cost_norm": 0.1579088270664215,
+      "decision_time_ms": 0.25766799808479846
+    },
+    {
+      "step": 108,
+      "position": [
+        1,
+        39
+      ],
+      "chosen_action": 4,
+      "chosen_prob": 0.8205286264419556,
+      "predicted_cost_norm": 0.16950306296348572,
+      "decision_time_ms": 0.24928599304985255
+    },
+    {
+      "step": 109,
+      "position": [
+        2,
+        39
+      ],
+      "chosen_action": 0,
+      "chosen_prob": 0.022875823080539703,
+      "predicted_cost_norm": 0.1579088270664215,
+      "decision_time_ms": 0.2563640009611845
+    },
+    {
+      "step": 110,
+      "position": [
+        1,
+        39
+      ],
+      "chosen_action": 4,
+      "chosen_prob": 0.8205286264419556,
+      "predicted_cost_norm": 0.16950306296348572,
+      "decision_time_ms": 0.24894200032576919
+    },
+    {
+      "step": 111,
+      "position": [
+        2,
+        39
+      ],
+      "chosen_action": 4,
+      "chosen_prob": 0.002512675244361162,
+      "predicted_cost_norm": 0.1579088270664215,
+      "decision_time_ms": 0.2568030031397939
+    },
+    {
+      "step": 112,
+      "position": [
+        3,
+        39
+      ],
+      "chosen_action": 0,
+      "chosen_prob": 0.739608645439148,
+      "predicted_cost_norm": 0.13926860690116882,
+      "decision_time_ms": 0.25449298846069723
+    },
+    {
+      "step": 113,
+      "position": [
+        2,
+        39
+      ],
+      "chosen_action": 4,
+      "chosen_prob": 0.002512675244361162,
+      "predicted_cost_norm": 0.1579088270664215,
+      "decision_time_ms": 0.24775600468274206
+    },
+    {
+      "step": 114,
+      "position": [
+        3,
+        39
+      ],
+      "chosen_action": 0,
+      "chosen_prob": 0.739608645439148,
+      "predicted_cost_norm": 0.13926860690116882,
+      "decision_time_ms": 0.2522380091249943
+    },
+    {
+      "step": 115,
+      "position": [
+        2,
+        39
+      ],
+      "chosen_action": 4,
+      "chosen_prob": 0.002512675244361162,
+      "predicted_cost_norm": 0.1579088270664215,
+      "decision_time_ms": 0.25280700356233865
+    },
+    {
+      "step": 116,
+      "position": [
+        3,
+        39
+      ],
+      "chosen_action": 0,
+      "chosen_prob": 0.739608645439148,
+      "predicted_cost_norm": 0.13926860690116882,
+      "decision_time_ms": 0.24813400523271412
+    },
+    {
+      "step": 117,
+      "position": [
+        2,
+        39
+      ],
+      "chosen_action": 5,
+      "chosen_prob": 0.7195706367492676,
+      "predicted_cost_norm": 0.1579088270664215,
+      "decision_time_ms": 0.25196799833793193
+    },
+    {
+      "step": 118,
+      "position": [
+        3,
+        38
+      ],
+      "chosen_action": 6,
+      "chosen_prob": 0.010487634688615799,
+      "predicted_cost_norm": 0.10264229774475098,
+      "decision_time_ms": 0.2501050039427355
+    },
+    {
+      "step": 119,
+      "position": [
+        3,
+        37
+      ],
+      "chosen_action": 0,
+      "chosen_prob": 0.7425419688224792,
+      "predicted_cost_norm": 0.08559586107730865,
+      "decision_time_ms": 0.25336199905723333
+    },
+    {
+      "step": 120,
+      "position": [
+        2,
+        37
+      ],
+      "chosen_action": 4,
+      "chosen_prob": 0.0035627451725304127,
+      "predicted_cost_norm": 0.0320572555065155,
+      "decision_time_ms": 0.26924299891106784
+    },
+    {
+      "step": 121,
+      "position": [
+        3,
+        37
+      ],
+      "chosen_action": 0,
+      "chosen_prob": 0.7425419688224792,
+      "predicted_cost_norm": 0.08559586107730865,
+      "decision_time_ms": 0.2562669978942722
+    },
+    {
+      "step": 122,
+      "position": [
+        2,
+        37
+      ],
+      "chosen_action": 4,
+      "chosen_prob": 0.0035627451725304127,
+      "predicted_cost_norm": 0.0320572555065155,
+      "decision_time_ms": 0.25155500043183565
+    },
+    {
+      "step": 123,
+      "position": [
+        3,
+        37
+      ],
+      "chosen_action": 0,
+      "chosen_prob": 0.7425419688224792,
+      "predicted_cost_norm": 0.08559586107730865,
+      "decision_time_ms": 0.2536209940444678
+    },
+    {
+      "step": 124,
+      "position": [
+        2,
+        37
+      ],
+      "chosen_action": 0,
+      "chosen_prob": 0.0019811708480119705,
+      "predicted_cost_norm": 0.0320572555065155,
+      "decision_time_ms": 0.2592060045571998
+    },
+    {
+      "step": 125,
+      "position": [
+        1,
+        37
+      ],
+      "chosen_action": 6,
+      "chosen_prob": 0.8803180456161499,
+      "predicted_cost_norm": 0.15374279022216797,
+      "decision_time_ms": 0.25497301248833537
+    },
+    {
+      "step": 126,
+      "position": [
+        1,
+        36
+      ],
+      "chosen_action": 5,
+      "chosen_prob": 0.2869277894496918,
+      "predicted_cost_norm": 0.078924760222435,
+      "decision_time_ms": 0.26055899797938764
+    },
+    {
+      "step": 127,
+      "position": [
+        2,
+        35
+      ],
+      "chosen_action": 7,
+      "chosen_prob": 0.4159834682941437,
+      "predicted_cost_norm": 0.10643798112869263,
+      "decision_time_ms": 0.2543680020608008
+    },
+    {
+      "step": 128,
+      "position": [
+        1,
+        34
+      ],
+      "chosen_action": 2,
+      "chosen_prob": 0.3726949691772461,
+      "predicted_cost_norm": 0.10822978615760803,
+      "decision_time_ms": 0.2545870083849877
+    },
+    {
+      "step": 129,
+      "position": [
+        1,
+        35
+      ],
+      "chosen_action": 6,
+      "chosen_prob": 0.2159535139799118,
+      "predicted_cost_norm": 0.21090450882911682,
+      "decision_time_ms": 0.2666040090844035
+    },
+    {
+      "step": 130,
+      "position": [
+        1,
+        34
+      ],
+      "chosen_action": 2,
+      "chosen_prob": 0.3726949691772461,
+      "predicted_cost_norm": 0.10822978615760803,
+      "decision_time_ms": 0.2594149991637096
+    },
+    {
+      "step": 131,
+      "position": [
+        1,
+        35
+      ],
+      "chosen_action": 4,
+      "chosen_prob": 0.0002207092911703512,
+      "predicted_cost_norm": 0.21090450882911682,
+      "decision_time_ms": 0.2545949973864481
+    },
+    {
+      "step": 132,
+      "position": [
+        2,
+        35
+      ],
+      "chosen_action": 4,
+      "chosen_prob": 0.28640326857566833,
+      "predicted_cost_norm": 0.10643798112869263,
+      "decision_time_ms": 0.27355299971532077
+    },
+    {
+      "step": 133,
+      "position": [
+        3,
+        35
+      ],
+      "chosen_action": 0,
+      "chosen_prob": 0.6233535408973694,
+      "predicted_cost_norm": 0.05307994782924652,
+      "decision_time_ms": 0.2538630069466308
+    },
+    {
+      "step": 134,
+      "position": [
+        2,
+        35
+      ],
+      "chosen_action": 4,
+      "chosen_prob": 0.28640326857566833,
+      "predicted_cost_norm": 0.10643798112869263,
+      "decision_time_ms": 0.25853299302980304
+    },
+    {
+      "step": 135,
+      "position": [
+        3,
+        35
+      ],
+      "chosen_action": 4,
+      "chosen_prob": 0.376155287027359,
+      "predicted_cost_norm": 0.05307994782924652,
+      "decision_time_ms": 0.263556998106651
+    },
+    {
+      "step": 136,
+      "position": [
+        4,
+        35
+      ],
+      "chosen_action": 3,
+      "chosen_prob": 0.5032051205635071,
+      "predicted_cost_norm": 0.13054803013801575,
+      "decision_time_ms": 0.2708690008148551
+    },
+    {
+      "step": 137,
+      "position": [
+        5,
+        36
+      ],
+      "chosen_action": 2,
+      "chosen_prob": 0.5385870337486267,
+      "predicted_cost_norm": 0.11927211284637451,
+      "decision_time_ms": 0.2528240001993254
+    },
+    {
+      "step": 138,
+      "position": [
+        5,
+        37
+      ],
+      "chosen_action": 2,
+      "chosen_prob": 0.6647427082061768,
+      "predicted_cost_norm": 0.07814699411392212,
+      "decision_time_ms": 0.2543239970691502
+    },
+    {
+      "step": 139,
+      "position": [
+        5,
+        38
+      ],
+      "chosen_action": 3,
+      "chosen_prob": 0.6981753706932068,
+      "predicted_cost_norm": 0.17773441970348358,
+      "decision_time_ms": 0.2561190049163997
+    }
+  ]
+}

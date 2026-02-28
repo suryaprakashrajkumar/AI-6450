@@ -1,0 +1,18 @@
+{
+  "classification": {
+    "val_accuracy": 0.5773047375160051,
+    "test_accuracy": 0.589499886852229
+  },
+  "regression": {
+    "val_mae": 31.88521385192871,
+    "test_mae": 20.648296356201172,
+    "val_rmse": 48.737816486373035,
+    "test_rmse": 25.421960231495106
+  },
+  "data": {
+    "train_samples": 25000,
+    "val_samples": 6248,
+    "test_samples": 4419,
+    "feature_dim": 229
+  }
+}

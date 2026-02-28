@@ -1,0 +1,45 @@
+{
+  "seed": 42,
+  "grid_config": {
+    "height": 49,
+    "width": 49,
+    "obstacle_density": 0.2,
+    "min_start_goal_l2": 14.0,
+    "map_type": "maze",
+    "maze_extra_open_prob": 0.02
+  },
+  "dataset_config": {
+    "episodes": 700,
+    "patch_size": 15,
+    "max_episode_sampling_attempts": 50,
+    "train_ratio": 0.8,
+    "val_ratio": 0.1,
+    "test_ratio": 0.1
+  },
+  "num_samples": 58050,
+  "num_episodes": 700,
+  "split_counts": {
+    "train": 47383,
+    "val": 6248,
+    "test": 4419
+  },
+  "fields": {
+    "local_patch": "(N,P,P) uint8 obstacle map patch",
+    "relative_goal": "(N,2) float32 normalized [dr, dc]",
+    "action_id": "(N,) int64 in [0..7]",
+    "cost_to_goal": "(N,) float32",
+    "agent_position": "(N,2) int64 [row, col]",
+    "episode_id": "(N,) int64",
+    "timestep": "(N,) int64",
+    "split": "(N,) int8 0=train,1=val,2=test"
+  },
+  "episode_artifacts": {
+    "episode_data.npz": {
+      "episode_grid": "(E,H,W) uint8 full occupancy grid per episode",
+      "episode_start": "(E,2) int64",
+      "episode_goal": "(E,2) int64",
+      "episode_split": "(E,) int8 0=train,1=val,2=test"
+    },
+    "expert_trajectories.jsonl": "One record per episode with complete grid-based path coordinates"
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "num_cases": 4,
+  "success_rate": 0.0,
+  "cases": [
+    {
+      "episode_id": 368,
+      "split": 2,
+      "success": false,
+      "collision": false,
+      "timeout": true,
+      "pred_path_steps": 392,
+      "pred_path_cost": 433.8355697996826,
+      "optimal_path_cost": 128.9827560572969,
+      "optimality_ratio": NaN,
+      "mean_model_decision_time_ms": 0.12929132872716076,
+      "astar_solve_time_ms": 1.7169179918710142
+    },
+    {
+      "episode_id": 61,
+      "split": 2,
+      "success": false,
+      "collision": false,
+      "timeout": true,
+      "pred_path_steps": 392,
+      "pred_path_cost": 396.55634918610406,
+      "optimal_path_cost": 102.32590180780453,
+      "optimality_ratio": NaN,
+      "mean_model_decision_time_ms": 0.18689923497880287,
+      "astar_solve_time_ms": 3.158473002258688
+    },
+    {
+      "episode_id": 473,
+      "split": 2,
+      "success": false,
+      "collision": false,
+      "timeout": true,
+      "pred_path_steps": 392,
+      "pred_path_cost": 406.0832611206852,
+      "optimal_path_cost": 121.63961030678928,
+      "optimality_ratio": NaN,
+      "mean_model_decision_time_ms": 0.2581391247670637,
+      "astar_solve_time_ms": 1.6569599974900484
+    },
+    {
+      "episode_id": 552,
+      "split": 2,
+      "success": false,
+      "collision": false,
+      "timeout": true,
+      "pred_path_steps": 392,
+      "pred_path_cost": 494.7249634685276,
+      "optimal_path_cost": 73.84062043356595,
+      "optimality_ratio": NaN,
+      "mean_model_decision_time_ms": 0.26670781075413935,
+      "astar_solve_time_ms": 1.7171660001622513
+    }
+  ]
+}

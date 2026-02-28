@@ -1,0 +1,52 @@
+{
+  "num_samples": 58050,
+  "missing": {
+    "local_patch_nan": 0,
+    "relative_goal_nan": 0,
+    "cost_to_goal_nan": 0
+  },
+  "unit_checks": {
+    "local_patch_binary_ok": true,
+    "relative_goal_range_ok": true,
+    "action_range_ok": true,
+    "agent_position_nonnegative": true
+  },
+  "duplicates": {
+    "duplicate_count": 0,
+    "duplicate_ratio": 0.0
+  },
+  "outliers": {
+    "cost_p95": 163.61016845703125,
+    "cost_p99": 224.94569396972656,
+    "outlier_threshold": 224.94569396972656,
+    "outlier_count": 581
+  },
+  "class_distribution": {
+    "0": 8129,
+    "1": 6513,
+    "2": 7911,
+    "3": 6299,
+    "4": 8136,
+    "5": 6305,
+    "6": 8120,
+    "7": 6637
+  },
+  "class_imbalance_ratio_max_over_min": 1.2916335926337514,
+  "drift": {
+    "train_cost_mean": 63.31574249267578,
+    "test_cost_mean": 54.20592498779297,
+    "train_cost_std": 49.4417839050293,
+    "test_cost_std": 40.03464889526367,
+    "action_js_divergence_train_vs_test": 0.0019155388790441843
+  },
+  "issue_handling_plan_checks": {
+    "missing_values": "None expected; verified counts in report",
+    "inconsistent_units": "Fixed grid units; binary occupancy and normalized relative goal checked",
+    "label_noise": "Very low by construction from deterministic planner",
+    "outliers": "Long paths measured via cost percentiles; map size controls tail",
+    "duplicate_samples": "Possible; duplicate ratio reported",
+    "data_drift": "Train/test drift measured by action JS divergence + cost stats",
+    "class_imbalance": "Likely; class count ratio reported (consider weighted loss)",
+    "labeling": "Deterministic planner ground truth"
+  }
+}

@@ -1,0 +1,66 @@
+epoch 001/100 | train_loss=1.6670 val_loss=1.3674 val_acc=0.402 val_cost_rmse=60.792
+epoch 010/100 | train_loss=0.8456 val_loss=0.9785 val_acc=0.557 val_cost_rmse=58.788
+epoch 020/100 | train_loss=0.7900 val_loss=0.8855 val_acc=0.597 val_cost_rmse=53.325
+epoch 030/100 | train_loss=0.7297 val_loss=0.8727 val_acc=0.618 val_cost_rmse=51.176
+epoch 040/100 | train_loss=0.6365 val_loss=0.8979 val_acc=0.597 val_cost_rmse=51.168
+epoch 050/100 | train_loss=0.5555 val_loss=0.9421 val_acc=0.610 val_cost_rmse=50.283
+epoch 060/100 | train_loss=0.4703 val_loss=1.0909 val_acc=0.592 val_cost_rmse=49.810
+epoch 070/100 | train_loss=0.3776 val_loss=1.2366 val_acc=0.582 val_cost_rmse=50.873
+epoch 080/100 | train_loss=0.3052 val_loss=1.4327 val_acc=0.589 val_cost_rmse=50.097
+epoch 090/100 | train_loss=0.2213 val_loss=1.6991 val_acc=0.574 val_cost_rmse=49.788
+epoch 100/100 | train_loss=0.1952 val_loss=1.8994 val_acc=0.579 val_cost_rmse=49.838
+
+Sample inferences (Torch MLP, test split):
+idx=56749 | action true/pred=6/3 (conf=0.775) | cost true/pred=46.21/79.99
+idx=13232 | action true/pred=5/2 (conf=0.768) | cost true/pred=29.38/67.61
+idx=56762 | action true/pred=5/5 (conf=0.807) | cost true/pred=31.97/59.30
+idx=712 | action true/pred=1/1 (conf=0.752) | cost true/pred=110.47/61.99
+idx=38360 | action true/pred=2/6 (conf=0.754) | cost true/pred=1.00/29.96
+idx=32758 | action true/pred=3/7 (conf=0.713) | cost true/pred=18.31/23.68
+idx=49907 | action true/pred=6/6 (conf=0.782) | cost true/pred=70.70/46.36
+idx=45997 | action true/pred=5/5 (conf=0.630) | cost true/pred=28.80/34.37
+idx=26227 | action true/pred=4/4 (conf=0.940) | cost true/pred=39.90/80.29
+idx=52882 | action true/pred=5/3 (conf=0.664) | cost true/pred=188.07/153.95
+idx=19156 | action true/pred=6/2 (conf=0.575) | cost true/pred=101.40/94.18
+idx=779 | action true/pred=1/1 (conf=0.816) | cost true/pred=28.14/66.41
+
+Training + evaluation complete.
+{
+  "device": "cpu",
+  "epochs": 100,
+  "action_loss": "hybrid",
+  "best_val_total_loss": 0.8649218498363079,
+  "val_step_metrics": {
+    "action_accuracy": 0.6081946222791293,
+    "cost_mae": 37.00334930419922,
+    "cost_rmse": 51.850704193115234,
+    "cost_r2": 0.23897501192289372
+  },
+  "test_step_metrics": {
+    "action_accuracy": 0.6449422946367956,
+    "cost_mae": 28.29752540588379,
+    "cost_rmse": 33.52712631225586,
+    "cost_r2": 0.29867300009032804
+  },
+  "kpis": {
+    "astar": {
+      "success_rate": 1.0,
+      "optimality_ratio": 1.0,
+      "decision_time_ms": 0.019701066101175165
+    },
+    "mlp": {
+      "success_rate": 0.1774193548387097,
+      "optimality_ratio": 5.006800037384606,
+      "decision_time_ms": 0.21527209309193587
+    }
+  },
+  "additional_metrics": {
+    "collision_rate": 0.0,
+    "timeout_rate": 0.8225806451612904,
+    "test_action_acc": 0.6449422946367956,
+    "test_cost_rmse": 33.52712631225586
+  },
+  "num_test_episodes_eval": 62
+}
+Saved model: models/torch/run_small/torch_mlp_best.pt
+Artifacts: artifacts/figures
