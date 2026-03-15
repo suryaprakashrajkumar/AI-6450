@@ -1,0 +1,23 @@
+{
+  "enable_astar_fallback": true,
+  "enable_confidence_fallback": false,
+  "fallback_confidence_threshold": 0.36,
+  "fallback_min_step": 4,
+  "fallback_no_progress_patience": 1,
+  "fallback_max_calls": 1,
+  "model_type": "cnn_large",
+  "samples": 120.0,
+  "path_validity": 1.0,
+  "exact_match": 0.825,
+  "step_accuracy": NaN,
+  "optimality_gap_mean": 0.058182488807488796,
+  "optimality_gap_p95": 0.30897435897435893,
+  "success_under_1_5x": 0.9833333333333333,
+  "path_length_ratio_mean": 1.0581824888074889,
+  "astar_ms_per_query": 0.16746500162601782,
+  "policy_ms_per_query": 37.7985358327957,
+  "speedup_astar_over_policy": 0.004430462660427119,
+  "speedup_policy_over_astar": 225.71006159966032,
+  "stage": "coarse",
+  "score": 1112.767398750269
+}

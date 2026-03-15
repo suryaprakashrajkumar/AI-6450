@@ -1,0 +1,15 @@
+{
+  "model_type": "cnn_large",
+  "samples": 240.0,
+  "path_validity": 1.0,
+  "exact_match": 0.8375,
+  "step_accuracy": NaN,
+  "optimality_gap_mean": 0.045957850020350015,
+  "optimality_gap_p95": 0.30897435897435854,
+  "success_under_1_5x": 0.9791666666666666,
+  "path_length_ratio_mean": 1.0459578500203501,
+  "astar_ms_per_query": 0.21282624984451104,
+  "policy_ms_per_query": 79.49854666730971,
+  "speedup_astar_over_policy": 0.002677108686466422,
+  "speedup_policy_over_astar": 373.53731847171406
+}

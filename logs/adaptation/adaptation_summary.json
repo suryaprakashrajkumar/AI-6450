@@ -1,0 +1,9 @@
+{
+  "shift_target_density": 0.5,
+  "augment_ratio": 0.2,
+  "rollout_limit": 400,
+  "before_path_validity": 0.775,
+  "after_path_validity": 0.775,
+  "before_exact_match": 0.465,
+  "after_exact_match": 0.485
+}

@@ -1,0 +1,6 @@
+{
+  "selected_cases": 10,
+  "resolved_cases": 3,
+  "csv": "logs\\failure_casebook\\failure_casebook.csv",
+  "images_dir": "logs\\failure_casebook\\images"
+}

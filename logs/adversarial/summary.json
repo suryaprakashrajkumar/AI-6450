@@ -1,0 +1,9 @@
+{
+  "n_rows": 4,
+  "csv": "logs\\adversarial\\adversarial_results.csv",
+  "threat_model": {
+    "white_box": "knows map geometry and blocks straight-line corridor",
+    "gray_box": "knows start/goal, partial knowledge of policy behavior",
+    "black_box": "can inject obstacle perturbations without model access"
+  }
+}

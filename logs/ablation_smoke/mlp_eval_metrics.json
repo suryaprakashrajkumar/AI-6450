@@ -1,0 +1,15 @@
+{
+  "model_type": "mlp",
+  "samples": 55.0,
+  "path_validity": 0.41818181818181815,
+  "exact_match": 0.05454545454545454,
+  "step_accuracy": 0.23893805309734514,
+  "optimality_gap_mean": 1.680193236714976,
+  "optimality_gap_p95": 8.839999999999998,
+  "success_under_1_5x": 0.5217391304347826,
+  "path_length_ratio_mean": 2.6801932367149757,
+  "astar_ms_per_query": 0.12357999803498389,
+  "policy_ms_per_query": 2.851692726306448,
+  "speedup_astar_over_policy": 0.04333566407592813,
+  "speedup_policy_over_astar": 23.07568191981336
+}

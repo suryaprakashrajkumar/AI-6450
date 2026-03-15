@@ -1,0 +1,21 @@
+{
+  "grid_size": 10,
+  "n_actions": 8,
+  "seed": 42,
+  "min_obstacle_density": 0.1,
+  "max_obstacle_density": 0.35,
+  "n_maps": 80,
+  "pairs_per_map": 6,
+  "min_astar_path_len": 4,
+  "train_split": 0.7,
+  "val_split": 0.15,
+  "test_split": 0.15,
+  "hidden_dim": 256,
+  "batch_size": 128,
+  "lr": 0.001,
+  "weight_decay": 1e-05,
+  "epochs": 3,
+  "early_stop_patience": 2,
+  "rollout_step_cap": 60,
+  "qa_action_imbalance_ratio_threshold": 0.05
+}

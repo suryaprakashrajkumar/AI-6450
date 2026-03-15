@@ -1,0 +1,15 @@
+passed: True
+
+stats:
+  n_samples: 11860.0
+  duplicate_ratio: 0.016441821247892074
+  action_min_count: 1276.0
+  action_max_count: 1704.0
+
+warnings:
+  - Duplicate values: 195/11860 duplicate samples found.
+  - Data drift risk: temporal drift not applicable for static synthetic generation.
+  - Labelling mode: supervised expert labels from A* (unsupervised concern not applicable).
+
+errors:
+  - none

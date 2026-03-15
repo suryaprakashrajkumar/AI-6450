@@ -1,0 +1,9 @@
+{
+  "model_type": "cnn_large",
+  "hidden_dim": 512.0,
+  "best_val_acc": 0.7678752107925801,
+  "best_val_loss": 0.8692459590921514,
+  "epochs_completed": 6.0,
+  "train_samples": 67816.0,
+  "val_samples": 11860.0
+}

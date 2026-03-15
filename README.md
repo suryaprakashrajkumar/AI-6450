@@ -1,126 +1,112 @@
-# AI-6450
+# Imitation Learning Path Planner (10x10)
 
-Dataset collection toolkit for studying decision-making methods for autonomous navigation in a 2-D grid world.
+This project trains a neural policy to imitate an 8-direction A* expert on 10x10 grids.
 
-This repo is organized as a clean ML project and currently retains the **small maze dataset** as the primary dataset version.
+## What is implemented
+- Expert data generation with A* over diverse obstacle maps and start/goal pairs.
+- Iterative next-action imitation model (CNN + MLP) in PyTorch.
+- Lightweight sklearn baseline for sanity comparison.
+- Dataset quality gates for:
+  - missing values
+  - inconsistent formats/units
+  - label noise/weak labels
+  - outliers/erroneous values
+  - duplicate values
+  - data drift risk (temporal, marked N/A for static synthetic generation)
+  - class imbalance
+  - unsupervised labelling concern (marked N/A, labels are from A*)
+- End-to-end benchmark against A* solve time on CPU.
 
-This repository now includes a reproducible data generator for:
+## Setup (Windows)
 
-- **Heuristic search (A\*)** as expert policy
-- **Supervised learning** labels for:
-	- next-action classification (8-connected motion)
-	- cost-to-goal regression
-- **Imitation learning** trajectories from expert demonstrations
-- **Maze-based grid path learning** with complete path retention
+### Conda path (preferred)
+1. `conda create -n imitation python=3.10 -y`
+1. `conda activate imitation`
+1. `pip install -r requirements.txt`
 
-## Problem setup
+### venv fallback
+1. `python -m venv .venv`
+1. `.venv\Scripts\activate`
+1. `pip install -r requirements.txt`
 
-At each decision step, a sample includes:
+## Run pipeline
+1. Generate dataset:
+   - `python scripts/generate_data.py`
+1. Run QA checks:
+   - `python scripts/quality_check.py`
+1. Train PyTorch model:
+   - `python scripts/train_model.py`
+1. Train sklearn baseline:
+   - `python scripts/run_baseline.py`
+1. Evaluate policy vs A*:
+   - `python scripts/evaluate_model.py`
 
-- `local_patch`: fixed-size occupancy map centered at the agent (`1=obstacle`, `0=free`)
-- `relative_goal`: goal location relative to agent, normalized to `[-1, 1]`
-- labels:
-	- `action_id`: one of 8 neighboring directions
-	- `cost_to_goal`: shortest-path distance to goal under 8-connected moves
+## KPI suite (implemented)
+The evaluation now reports these KPIs:
+- `path_validity`: fraction of test rollout tasks reaching goal without invalid moves.
+- `exact_match`: fraction of tasks where predicted path exactly matches A* path.
+- `step_accuracy`: next-action classification accuracy on test step dataset.
+- `optimality_gap_mean`: mean `(pred_len - astar_len) / astar_len` over successful rollouts.
+- `optimality_gap_p95`: 95th percentile of optimality gap.
+- `success_under_1_5x`: successful rollouts with path length <= 1.5x A*.
+- `path_length_ratio_mean`: mean `pred_len / astar_len` for successful rollouts.
+- `astar_ms_per_query`: average A* solve time.
+- `policy_ms_per_query`: average end-to-end policy rollout solve time.
+- `speedup_astar_over_policy`: A* time divided by policy time.
+- `speedup_policy_over_astar`: policy time divided by A* time.
 
-## Dataset collection strategy implemented
+## Large run and ablation (implemented)
 
-The collector follows this strategy:
+### 1. Large-data generation and QA
+- `python -m scripts.generate_data --config config_large.json`
+- `python -m scripts.quality_check --config config_large.json`
 
-1. Generate valid occupancy grids with either:
-	- `random` obstacle maps, or
-	- `maze` maps (complex corridor-like structure)
-2. Sample start/goal pairs on free cells.
-3. Run A\* to obtain an optimal expert path (if no path exists, reject episode).
-4. Convert each state along the path into a supervised sample:
-	 - extract local occupancy patch around agent
-	 - compute relative goal vector
-	 - compute next action from consecutive states
-	 - compute exact remaining path cost (suffix length)
-5. Save all samples with episode metadata and create train/val/test splits.
+### 2. Ablation across model families
+- `python -m scripts.ablation_study --config config_large.json --models mlp,cnn_small,cnn_large --out_dir logs/ablation --include_sklearn`
 
-This gives a clean dataset for both imitation learning and supervised learning baselines, while preserving trajectory structure for sequential analysis.
+Outputs:
+- `logs/ablation/ablation_results.csv`
+- Per-model train/eval metrics JSON files and model checkpoints
 
-## Repository structure
+### 3. Charts and rollout-time comparisons
+- `python -m scripts.plot_ablation --input logs/ablation/ablation_results.csv --out_dir logs/ablation/charts`
 
-- `src/nav_dataset/` – source code (dataset, models, training, audits, visualization)
-- `data/maze_small/` – retained small-maze dataset
-- `models/torch/` – saved PyTorch models
-- `models/sklearn/` – saved baseline sklearn models
-- `artifacts/figures/` – training curves, KPI comparison, visualizations
-- `artifacts/reports/` – metrics summaries and audit reports
-- `artifacts/inference/` – extracted inference outputs and run logs copy
-- `logs/` – full training logs
-- `docs/` – project documentation
-- `configs/`, `scripts/`, `tests/` – standard ML repo placeholders
+Generated charts:
+- `kpi_comparison.png`
+- `rollout_time_comparison.png`
+- `optimality_gap_comparison.png`
 
-## Quick start
+### 4. Single-command full experiment run
+- `python -m scripts.run_full_experiments --config config_large.json --models mlp,cnn_small,cnn_large --out_dir logs/ablation`
 
-Install dependencies:
+## Smoke validation already executed
+- Smoke ablation run completed at `logs/ablation_smoke`.
+- KPI CSV and charts were generated successfully.
+- Unit tests pass (`5 passed`).
 
-- Python 3.10+
-- `numpy`
+## Improved high-success run (executed)
 
-Generate a dataset:
+Commands:
+- `python -m scripts.generate_data --config config_improved.json`
+- `python -m scripts.quality_check --config config_improved.json`
+- `python -m scripts.train_model --config config_improved.json --output models/final/imitation_policy_improved.pth --metrics_output logs/improved_run/train_metrics.json --history_output logs/improved_run/train_history.csv --history_plot_output logs/improved_run/training_curves.png`
+- `python -m scripts.evaluate_model --config config_improved.json --test data/processed/test_rollout.npz --test_steps data/processed/test_samples.npz --model models/final/imitation_policy_improved.pth --metrics_output logs/improved_run/rollout_kpi.json`
 
-- `python -m src.nav_dataset.generate_dataset --output data/maze_small --episodes 700 --map-type maze --height 49 --width 49 --min-start-goal-l2 14 --seed 42`
+Saved artifacts:
+- Training log: `logs/improved_run/train_output.txt`
+- Training metrics: `logs/improved_run/train_metrics.json`
+- Training history CSV: `logs/improved_run/train_history.csv`
+- Training graphs: `logs/improved_run/training_curves.png`
+- Rollout KPI JSON: `logs/improved_run/rollout_kpi.json`
+- Rollout eval console output: `logs/improved_run/rollout_eval_output.txt`
 
-Generated files:
+## Core paths
+- `src/environment.py`: A* expert and grid dynamics.
+- `src/dataset.py`: dataset loader and quality checks.
+- `src/model.py`: imitation policy network.
+- `src/train.py`: training loop with early stopping.
+- `src/eval.py`: rollout and benchmark metrics.
 
-- `data/maze_small/navigation_dataset.npz` – arrays for ML training
-- `data/maze_small/metadata.json` – generation settings and summary statistics
-- `data/maze_small/episode_data.npz` – full occupancy grid per episode and endpoints
-- `data/maze_small/expert_trajectories.jsonl` – complete grid-based path coordinates per episode
-
-Train Torch model (100 epochs) and produce artifacts:
-
-- `python -m src.nav_dataset.train_torch_maze --dataset data/maze_small/navigation_dataset.npz --episode-data data/maze_small/episode_data.npz --trajectories data/maze_small/expert_trajectories.jsonl --output models/torch/run_small --artifacts artifacts/figures --epochs 100 --seed 42 --action-loss hybrid --use-class-weights`
-
-Audit dataset quality and distribution:
-
-- `python -m src.nav_dataset.audit_dataset --dataset data/maze_small/navigation_dataset.npz --output artifacts/reports/data_audit_small`
-
-## Data format (`navigation_dataset.npz`)
-
-- `local_patch` : `(N, P, P)` uint8
-- `relative_goal` : `(N, 2)` float32
-- `agent_position` : `(N, 2)` int64 grid coordinates `[row, col]`
-- `action_id` : `(N,)` int64
-- `cost_to_goal` : `(N,)` float32
-- `episode_id` : `(N,)` int64
-- `timestep` : `(N,)` int64
-- `split` : `(N,)` int8 where `0=train, 1=val, 2=test`
-
-## Episode-level artifacts for full path learning
-
-- `episode_data.npz`
-	- `episode_grid` : `(E, H, W)` uint8
-	- `episode_start` : `(E, 2)` int64
-	- `episode_goal` : `(E, 2)` int64
-	- `episode_split` : `(E,)` int8
-- `expert_trajectories.jsonl`
-	- One JSON object per episode with `start`, `goal`, and complete `path` as grid coordinates `[[r0,c0], [r1,c1], ...]`
-
-This is the representation you can use directly for **grid-based complete-path learning**.
-
-For a formal write-up of the dataset rationale and collection process, see `docs/2_1_dataset_description.md`.
-
-## Logs and inference outputs
-
-- Full run logs are kept in `logs/`
-- Inference snippets and copied run logs are kept in `artifacts/inference/`
-
-## KPI compatibility
-
-The data includes what you need to evaluate your proposed KPIs downstream:
-
-- **Success rate**: replay learned policy in held-out maps
-- **Optimality ratio**: compare policy trajectory length to A\* path length
-- **Computation time per decision**: benchmark model inference vs A\* query time
-
----
-
-If you want, I can also add the next step: an evaluation script that directly computes success rate / optimality ratio / decision latency for A\* vs learned policies.
-
-
-some files were created using Claude code, code reviewed by Surya 
+## Notes
+- Speed metric is end-to-end rollout solve time on CPU.
+- If strict speedup over A* is not reached for all cases, a practical hybrid strategy is to use policy-first with A* fallback on confidence/step-cap triggers.

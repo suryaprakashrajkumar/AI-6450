@@ -1,0 +1,6 @@
+{
+  "n_windows": 10,
+  "n_alert_windows": 8,
+  "psi_alert_threshold": 0.2,
+  "js_alert_threshold": 0.08
+}
