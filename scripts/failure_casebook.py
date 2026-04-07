@@ -13,6 +13,7 @@ from src.config import load_config
 from src.environment import AStarPlanner, Point
 from src.eval import rollout_policy
 from src.model import build_model
+from src.utils import get_torch_device
 
 
 def _gap(pred_len: int, expert_len: int, success: bool) -> float:
@@ -62,13 +63,15 @@ def _plot_case(grid: np.ndarray, expert: list[Point], base: list[Point], adapted
 
 def _load_model(model_path: str, config_path: str):
     cfg = load_config(config_path)
-    ckpt = torch.load(model_path, map_location="cpu")
+    device = get_torch_device()
+    ckpt = torch.load(model_path, map_location=device)
     model = build_model(
         model_type=ckpt.get("model_type", cfg.model_type),
         hidden_dim=ckpt.get("hidden_dim", cfg.hidden_dim),
         n_actions=ckpt.get("n_actions", cfg.n_actions),
     )
     model.load_state_dict(ckpt["state_dict"])
+    model.to(device)
     model.eval()
     return model, cfg
 

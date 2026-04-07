@@ -15,6 +15,19 @@ def set_seed(seed: int) -> None:
         torch.cuda.manual_seed_all(seed)
 
 
+def get_torch_device(require_cuda: bool = True) -> torch.device:
+    has_cuda = torch.cuda.is_available()
+    if require_cuda and not has_cuda:
+        raise RuntimeError(
+            "CUDA is required for this project run but no CUDA device is available. "
+            "Install a CUDA-enabled PyTorch build and ensure an NVIDIA GPU is visible."
+        )
+    device = torch.device("cuda" if has_cuda else "cpu")
+    if device.type == "cuda":
+        torch.backends.cudnn.benchmark = True
+    return device
+
+
 class Timer:
     def __enter__(self):
         self._start = time.perf_counter()

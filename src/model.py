@@ -60,6 +60,39 @@ class PathPolicyNetLarge(nn.Module):
         return self.head(x)
 
 
+class PathPolicyNetLargePlus(nn.Module):
+    def __init__(self, hidden_dim: int = 640, n_actions: int = 8):
+        super().__init__()
+        self.encoder = nn.Sequential(
+            nn.Conv2d(1, 32, kernel_size=3, padding=1),
+            nn.ReLU(),
+            nn.Conv2d(32, 64, kernel_size=3, padding=1),
+            nn.ReLU(),
+            nn.Conv2d(64, 96, kernel_size=3, padding=1),
+            nn.ReLU(),
+            nn.Conv2d(96, 96, kernel_size=3, padding=1),
+            nn.ReLU(),
+            nn.Flatten(),
+        )
+        self.head = nn.Sequential(
+            nn.Linear(9600 + 4, hidden_dim),
+            nn.ReLU(),
+            nn.Dropout(0.3),
+            nn.Linear(hidden_dim, hidden_dim // 2),
+            nn.ReLU(),
+            nn.Dropout(0.25),
+            nn.Linear(hidden_dim // 2, 320),
+            nn.ReLU(),
+            nn.Dropout(0.2),
+            nn.Linear(320, n_actions),
+        )
+
+    def forward(self, grid: torch.Tensor, pos: torch.Tensor, goal: torch.Tensor) -> torch.Tensor:
+        grid_feat = self.encoder(grid)
+        x = torch.cat([grid_feat, pos, goal], dim=1)
+        return self.head(x)
+
+
 class PathPolicyMLP(nn.Module):
     def __init__(self, hidden_dim: int = 256, n_actions: int = 8):
         super().__init__()
@@ -86,6 +119,8 @@ def build_model(model_type: str, hidden_dim: int, n_actions: int = 8) -> nn.Modu
         return PathPolicyNet(hidden_dim=hidden_dim, n_actions=n_actions)
     if model_type == "cnn_large":
         return PathPolicyNetLarge(hidden_dim=hidden_dim, n_actions=n_actions)
+    if model_type == "cnn_large_plus":
+        return PathPolicyNetLargePlus(hidden_dim=hidden_dim, n_actions=n_actions)
     if model_type == "mlp":
         return PathPolicyMLP(hidden_dim=hidden_dim, n_actions=n_actions)
-    raise ValueError(f"Unknown model_type '{model_type}'. Supported: cnn_small, cnn_large, mlp")
+    raise ValueError(f"Unknown model_type '{model_type}'. Supported: cnn_small, cnn_large, cnn_large_plus, mlp")

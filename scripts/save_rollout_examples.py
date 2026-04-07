@@ -13,6 +13,7 @@ from src.config import load_config
 from src.environment import AStarPlanner, Point
 from src.eval import rollout_policy
 from src.model import build_model
+from src.utils import get_torch_device
 
 
 def _path_to_xy(path: list[Point]) -> tuple[list[int], list[int]]:
@@ -105,13 +106,15 @@ def main() -> None:
     starts = payload["starts"]
     goals = payload["goals_full"]
 
-    ckpt = torch.load(args.model, map_location="cpu")
+    device = get_torch_device()
+    ckpt = torch.load(args.model, map_location=device)
     model = build_model(
         model_type=ckpt.get("model_type", cfg.model_type),
         hidden_dim=ckpt.get("hidden_dim", cfg.hidden_dim),
         n_actions=ckpt.get("n_actions", cfg.n_actions),
     )
     model.load_state_dict(ckpt["state_dict"])
+    model.to(device)
     model.eval()
 
     planner = AStarPlanner()

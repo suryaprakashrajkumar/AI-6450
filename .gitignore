@@ -1,0 +1,48 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+data/processed/*.npz
+models/final/*.pth
+models/final/*.joblib
+logs/
+
+# Safety/runtime generated artifacts
+data/processed/**/*.npz
+models/**/*.pth
+models/**/*.pt
+models/**/*.joblib
+
+# Local environment and secret-bearing files
+.env
+.env.*
+*.pem
+*.key
+*.p12
+
+# LaTeX build artifacts (submission/report outputs)
+reports/*.aux
+reports/*.fdb_latexmk
+reports/*.fls
+reports/*.log
+reports/*.out
+reports/*.synctex.gz
+reports/*.toc
+reports/*.pdf
+
+# Ignore full report workspace
+reports/
+
+# Planning / scratch notes
+todo.md
+TODO.md
+**/todo.md
+**/TODO.md
+
+# Copilot / chat residual artifacts
+.copilot/
+copilot/
+**/*copilot*.tmp
+**/*copilot*.log
+**/*chat-session*.json
+**/*chat-session*.md

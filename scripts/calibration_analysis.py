@@ -11,6 +11,7 @@ import torch
 
 from src.config import load_config
 from src.model import build_model
+from src.utils import get_torch_device
 
 
 def main() -> None:
@@ -27,13 +28,15 @@ def main() -> None:
     out_dir.mkdir(parents=True, exist_ok=True)
 
     cfg = load_config(args.config)
-    ckpt = torch.load(args.model, map_location="cpu")
+    device = get_torch_device()
+    ckpt = torch.load(args.model, map_location=device)
     model = build_model(
         model_type=ckpt.get("model_type", cfg.model_type),
         hidden_dim=ckpt.get("hidden_dim", cfg.hidden_dim),
         n_actions=ckpt.get("n_actions", cfg.n_actions),
     )
     model.load_state_dict(ckpt["state_dict"])
+    model.to(device)
     model.eval()
 
     payload = np.load(args.test_steps)
@@ -53,11 +56,11 @@ def main() -> None:
 
     with torch.no_grad():
         for i in range(n):
-            grid_t = torch.from_numpy(grids[i]).unsqueeze(0).unsqueeze(0)
-            pos_t = torch.tensor([[positions[i][0] / 9.0, positions[i][1] / 9.0]], dtype=torch.float32)
-            goal_t = torch.tensor([[goals[i][0] / 9.0, goals[i][1] / 9.0]], dtype=torch.float32)
+            grid_t = torch.from_numpy(grids[i]).unsqueeze(0).unsqueeze(0).to(device)
+            pos_t = torch.tensor([[positions[i][0] / 9.0, positions[i][1] / 9.0]], dtype=torch.float32, device=device)
+            goal_t = torch.tensor([[goals[i][0] / 9.0, goals[i][1] / 9.0]], dtype=torch.float32, device=device)
             logits = model(grid_t, pos_t, goal_t)
-            probs = torch.softmax(logits, dim=1).squeeze(0).numpy()
+            probs = torch.softmax(logits, dim=1).squeeze(0).cpu().numpy()
             pred = int(np.argmax(probs))
             conf = float(np.max(probs))
             confidences[i] = conf

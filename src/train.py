@@ -13,7 +13,7 @@ from torch.utils.data import DataLoader
 from src.config import load_config
 from src.dataset import ImitationDataset, run_quality_checks
 from src.model import build_model
-from src.utils import set_seed
+from src.utils import get_torch_device, set_seed
 
 
 def _build_weighted_loss(actions: torch.Tensor, n_actions: int = 8, label_smoothing: float = 0.0) -> nn.CrossEntropyLoss:
@@ -116,7 +116,7 @@ def train_model(
     val_loader = DataLoader(val_ds, batch_size=config.batch_size, shuffle=False)
 
     model = build_model(selected_model_type, hidden_dim=selected_hidden_dim, n_actions=config.n_actions)
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    device = get_torch_device()
     model.to(device)
 
     action_tensor = torch.tensor(train_ds.actions, dtype=torch.int64)

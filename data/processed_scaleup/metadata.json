@@ -1,0 +1,15 @@
+{
+  "seed": 42,
+  "grid_size": 10,
+  "n_maps": 1800,
+  "pairs_per_map": 16,
+  "generated_pairs": 28800,
+  "kept_pairs": 19017,
+  "min_obstacle_density": 0.08,
+  "max_obstacle_density": 0.44,
+  "density_bins": 10,
+  "rebalance_actions": true,
+  "max_action_ratio": 2.0,
+  "label_source": "A*",
+  "temporal_drift_risk": "not_applicable_static_synthetic"
+}

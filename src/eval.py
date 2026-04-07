@@ -11,6 +11,7 @@ import torch
 from src.config import load_config
 from src.environment import AStarPlanner, Point, action_to_delta
 from src.model import build_model
+from src.utils import get_torch_device
 
 
 def rollout_policy(
@@ -176,7 +177,8 @@ def evaluate_model(
         starts = starts[:use_n]
         goals = goals[:use_n]
 
-    ckpt = torch.load(model_path, map_location="cpu")
+    device = get_torch_device()
+    ckpt = torch.load(model_path, map_location=device)
     model_type = ckpt.get("model_type", config.model_type)
     model = build_model(
         model_type=model_type,
@@ -184,6 +186,7 @@ def evaluate_model(
         n_actions=ckpt.get("n_actions", 8),
     )
     model.load_state_dict(ckpt["state_dict"])
+    model.to(device)
     model.eval()
 
     planner = AStarPlanner()
