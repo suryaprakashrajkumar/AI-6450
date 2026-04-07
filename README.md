@@ -41,6 +41,59 @@ This project trains a neural policy to imitate an 8-direction A* expert on 10x10
 1. Evaluate policy vs A*:
    - `python scripts/evaluate_model.py`
 
+## Training runbook (recommended)
+
+### 1. Smoke training/eval
+1. Generate smoke dataset:
+   - `python -m scripts.generate_data --config config_smoke.json`
+1. Quality check:
+   - `python -m scripts.quality_check --config config_smoke.json`
+1. Train base model:
+   - `python -m scripts.train_model --config config_smoke.json --output models/final/imitation_policy_smoke.pth --metrics_output logs/smoke/train_metrics.json --history_output logs/smoke/train_history.csv --history_plot_output logs/smoke/training_curves.png`
+1. Evaluate base model:
+   - `python -m scripts.evaluate_model --config config_smoke.json --test data/processed/test_rollout.npz --test_steps data/processed/test_samples.npz --model models/final/imitation_policy_smoke.pth --metrics_output logs/smoke/rollout_kpi.json`
+
+### 2. Scale-up base model (required before DAgger/ER-CL)
+1. Generate scale-up dataset:
+   - `python -m scripts.generate_data --config config_scaleup.json`
+1. Quality check:
+   - `python -m scripts.quality_check --config config_scaleup.json`
+1. Train scale-up base checkpoint:
+   - `python -m scripts.train_model --config config_scaleup.json --output models/final/imitation_policy_scaleup.pth --metrics_output logs/scaleup_run/train_metrics.json --history_output logs/scaleup_run/train_history.csv --history_plot_output logs/scaleup_run/training_curves.png`
+
+## DAgger adaptation
+
+Run DAgger from the scale-up base model:
+
+- `python -m scripts.run_dagger --config config_scaleup.json --base_model models/final/imitation_policy_scaleup.pth --train_rollout data/processed_scaleup/train_rollout.npz --train_steps data/processed_scaleup/train_samples.npz --val_steps data/processed_scaleup/val_samples.npz --test_rollout data/processed_scaleup/test_rollout.npz --test_steps data/processed_scaleup/test_samples.npz --out_dir logs/dagger_scaleup --output_model models/final/imitation_policy_scaleup_dagger.pth`
+
+Main outputs:
+- `models/final/imitation_policy_scaleup_dagger.pth`
+- `logs/dagger_scaleup/baseline_eval_kpi.json`
+- `logs/dagger_scaleup/dagger_eval_kpi.json`
+- `logs/dagger_scaleup/baseline_eval_kpi_no_fallback.json`
+- `logs/dagger_scaleup/dagger_eval_kpi_no_fallback.json`
+- `logs/dagger_scaleup/dagger_summary.json`
+
+## ER-CL adaptation (Experience Replay Continual Learning)
+
+Run replay-based continual learning from the same base model:
+
+- `python -m scripts.run_experience_replay_cl --config config_scaleup.json --base_model models/final/imitation_policy_scaleup.pth --train_rollout data/processed_scaleup/train_rollout.npz --train_steps data/processed_scaleup/train_samples.npz --val_steps data/processed_scaleup/val_samples.npz --test_rollout data/processed_scaleup/test_rollout.npz --test_steps data/processed_scaleup/test_samples.npz --out_dir logs/replay_cl_scaleup --output_model models/final/imitation_policy_scaleup_replay_cl.pth`
+
+Main outputs:
+- `models/final/imitation_policy_scaleup_replay_cl.pth`
+- `logs/replay_cl_scaleup/baseline_eval_kpi.json`
+- `logs/replay_cl_scaleup/replay_eval_kpi.json`
+- `logs/replay_cl_scaleup/baseline_eval_kpi_no_fallback.json`
+- `logs/replay_cl_scaleup/replay_eval_kpi_no_fallback.json`
+- `logs/replay_cl_scaleup/replay_summary.json`
+
+## Quick comparison of base vs DAgger vs ER-CL
+- `python -m scripts.evaluate_model --config config_scaleup.json --model models/final/imitation_policy_scaleup.pth --test data/processed_scaleup/test_rollout.npz --test_steps data/processed_scaleup/test_samples.npz --metrics_output logs/adaptation/base_eval.json`
+- `python -m scripts.evaluate_model --config config_scaleup.json --model models/final/imitation_policy_scaleup_dagger.pth --test data/processed_scaleup/test_rollout.npz --test_steps data/processed_scaleup/test_samples.npz --metrics_output logs/adaptation/dagger_eval.json`
+- `python -m scripts.evaluate_model --config config_scaleup.json --model models/final/imitation_policy_scaleup_replay_cl.pth --test data/processed_scaleup/test_rollout.npz --test_steps data/processed_scaleup/test_samples.npz --metrics_output logs/adaptation/replay_cl_eval.json`
+
 ## KPI suite (implemented)
 The evaluation now reports these KPIs:
 - `path_validity`: fraction of test rollout tasks reaching goal without invalid moves.
